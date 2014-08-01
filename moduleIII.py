@@ -196,6 +196,18 @@ class StudentListHandler(webapp2.RequestHandler):
 
 class StudentNewHandler(webapp2.RequestHandler):
     def get(self):
+        if users.get_current_user():
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+
+        template_values = {
+            'url': url,
+            'url_linktext': url_linktext,
+            'user_name': users.get_current_user()
+        }
         template = JINJA_ENVIRONMENT.get_template('student_new.html')
         self.response.write(template.render())
 
@@ -231,6 +243,19 @@ class StudentEdit(webapp2.RequestHandler):
         
         students = Student.query().fetch()
         s_id = int(s_id)
+        if users.get_current_user():
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+        template_values={
+            'all_students': students,
+            'id': s_id,
+            'url': url,
+            'url_linktext': url_linktext,
+            'user_name': users.get_current_user(),
+        }
 
         values = {
             'all_students': students,
@@ -239,7 +264,7 @@ class StudentEdit(webapp2.RequestHandler):
 
  
         template = JINJA_ENVIRONMENT.get_template('student_edit.html')
-        self.response.write(template.render(values))
+        self.response.write(template.render(template_values))
 
 
     def post(self, s_id):
@@ -267,9 +292,21 @@ class Adviser(ndb.Model):
 
 class AdviserNew(webapp2.RequestHandler):
     def get(self):
+        if users.get_current_user():
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+
+        template_values = {
+            'url': url,
+            'url_linktext': url_linktext,
+            'user_name': users.get_current_user()
+        }
         
         template = JINJA_ENVIRONMENT.get_template('adviser_new.html')
-        self.response.write(template.render())
+        self.response.write(template.render(template_values))
     
     def post(self):
         adviser = Adviser()
@@ -315,10 +352,21 @@ class AdviserEdit(webapp2.RequestHandler):
     def get(self, advise_id):
         adviserquery = Adviser.query().fetch()
         advise_id = int(advise_id)
-        template_values ={
+        if users.get_current_user():
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+        template_values={
             'id': advise_id,
-            'all_adviserquery': adviserquery
+            'adviserquery': adviserquery,
+            'url': url,
+            'url_linktext': url_linktext,
+            'user_name': users.get_current_user(),
         }
+        
+
         template = JINJA_ENVIRONMENT.get_template('adviser_edit.html')
         self.response.write(template.render(template_values))
 
@@ -346,9 +394,21 @@ class Thesis(ndb.Model):
 
 class ThesisNew(webapp2.RequestHandler):
     def get(self):
+        if users.get_current_user():
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+
+        template_values = {
+            'url': url,
+            'url_linktext': url_linktext,
+            'user_name': users.get_current_user()
+        }
         
         template = JINJA_ENVIRONMENT.get_template('thesis_new.html')
-        self.response.write(template.render())
+        self.response.write(template.render(template_values))
     
     def post(self):
         thesis = Thesis()
@@ -400,6 +460,19 @@ class ThesisEdit(webapp2.RequestHandler):
         
         thesisquery = Thesis.query().fetch()
         thesis_id = int(thesis_id)
+        if users.get_current_user():
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+        template_values={
+            'thesisquery': thesisquery,
+            'id': thesis_id,
+            'url': url,
+            'url_linktext': url_linktext,
+            'user_name': users.get_current_user(),
+        }
 
         values = {
             'thesisquery': thesisquery,
@@ -408,7 +481,7 @@ class ThesisEdit(webapp2.RequestHandler):
 
  
         template = JINJA_ENVIRONMENT.get_template('thesis_edit.html')
-        self.response.write(template.render(values))
+        self.response.write(template.render(template_values))
 
     def post(self, thesis_id):
         thesis_id = int(thesis_id)

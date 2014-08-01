@@ -32,7 +32,8 @@
                 </ul>
             </li>
         </ul>
-    </div>    
+    </div>
+    {% if user_name %}    
     <h1>Add a New Adviser</h1>
     <form method="POST" action="/adviser/new" >
         <div>
@@ -77,5 +78,10 @@
             <input type="submit"  size="40" style="margin-left: 120px; padding: 10px">
         </div>
     </form>
+    {% else %}
+    <div id = "Login">
+    <h2>Click <a href="{{url|safe}}">login</a> to proceed.</h2>
+    </div>
+    {% endif%}
 </body>
 </html>

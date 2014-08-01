@@ -33,6 +33,7 @@
             </li>
         </ul>
     </div>
+    {% if user_name %}  
     <div>
     <h1>Edit Student Information</h1>
 
@@ -79,6 +80,11 @@
 
     {% endif %}          
     {% endfor %}
+    {% else %}
+    <div id = "Login">
+    <h2>Click <a href="{{url|safe}}">{{url_linktext}}</a> to proceed.</h2>
+    </div>
+    {% endif%}
 
 </body>
 </html>

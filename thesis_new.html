@@ -33,6 +33,7 @@
             </li>
         </ul>
     </div>    
+    {% if user_name %} 
     <div>
     <h1>Add a New Thesis</h1>
     <form method="POST" action="/thesis/new" >
@@ -70,5 +71,10 @@
             <input type="submit" size="40" style="margin-left: 120px; padding: 10px">
         </div>
     </form>
+    {% else %}
+    <div id = "Login">
+    <h2>Click <a href="{{url|safe}}">login</a> to proceed.</h2>
+    </div>
+    {% endif%}
 </body>
 </html>

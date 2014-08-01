@@ -32,10 +32,10 @@
                 </ul>
             </li>
         </ul>
-    </div>    
+    </div>
+{% if user_name %}    
     <h1>Edit Adviser Information</h1>
-
-    {% for t in all_adviserquery %}
+    {% for t in adviserquery %}
     {% if t.key.id()==id %}
     
     <form method="POST" action="/adviser/edit/{{t.key.id()}}" >
@@ -84,6 +84,11 @@
 
     {% endif %}           
     {% endfor %}
+ {% else %}
+    <div id = "Login">
+    <h2>Click <a href="{{url|safe}}">{{url_linktext}}</a> to proceed.</h2>
+    </div>
+    {% endif%}
 
 </body>
 </html>

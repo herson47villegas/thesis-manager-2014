@@ -35,7 +35,7 @@
     </div>    
     <div>
     <h1>Edit Thesis</h1>
-    
+{% if user_name %}     
     {% for t in thesisquery %}
     {% if t.key.id()==id %}
 
@@ -77,6 +77,10 @@
 
     {% endif %}           
     {% endfor %} 
-
+    {% else %}
+    <div id = "Login">
+    <h2>Click <a href="{{url|safe}}">{{url_linktext}}</a> to proceed.</h2>
+    </div>
+    {% endif%}
 </body>
 </html>
